@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.biblioteca_back_end.interfaceService.I_LibroService;
 import com.example.biblioteca_back_end.models.libro;
 
-@RequestMapping("api/v1/libros")
+@RequestMapping("api/v1/libro")
 @RestController
 @CrossOrigin
 public class libro_Controller {
@@ -27,7 +27,6 @@ public class libro_Controller {
 	private I_LibroService libro_Service;
 	
 	@PostMapping("/")
-
 	public ResponseEntity<Object> save(@ModelAttribute("libro") libro libro) {
 	    
 	    List<libro> libro2 = libro_Service.filtroLibros(libro.getCodigo_ISBN());

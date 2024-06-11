@@ -51,7 +51,7 @@ public class libro {
         Novela,
         Poesia,
         Romance,
-        Suspense,
+        Suspenso,
         Terror,
         Accion,
         Amor,

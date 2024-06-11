@@ -16,6 +16,6 @@ public interface I_Libro extends CrudRepository<libro, String> {
             + "li.titulo_libro LIKE %?1% OR "
 			+ "li.autor_libro LIKE %?1% OR "
 			+ "li.genero_libro LIKE %?1% OR "
-			+ "li.codigo_ISNB LIKE %?1% OR ")
+			+ "li.codigo_ISBN LIKE %?1%")
     List<libro>filtroLibros(String filtro); 
 }

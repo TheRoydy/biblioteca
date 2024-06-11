@@ -28,8 +28,8 @@ public class libro_Service implements I_LibroService {
 		
 		return listaLibros;
 	}
+
     //Para lo filtros
-	
 	@Override
 	public List<libro> filtroLibros(String filtro) {
 		List <libro> listaLibros=data.filtroLibros(filtro);
@@ -49,7 +49,4 @@ public class libro_Service implements I_LibroService {
 		data.deleteById(id);
 		return 1;
 	}
-
-
-    
 }
