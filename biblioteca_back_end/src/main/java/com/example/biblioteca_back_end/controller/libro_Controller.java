@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class libro_Controller {
 	private I_LibroService libro_Service;
 	
 	@PostMapping("/")
-	public ResponseEntity<Object> save(@ModelAttribute("libro") libro libro) {
+	public ResponseEntity<Object> save(@RequestBody libro libro) {
 	    
 	    List<libro> libro2 = libro_Service.filtroLibros(libro.getCodigo_ISBN());
 	    if (!libro2.isEmpty()) {
@@ -94,7 +95,7 @@ public class libro_Controller {
 	}
     
     @PutMapping("/{id_libro}")
-	public ResponseEntity<Object> update(@PathVariable("id") String id, @ModelAttribute("libro") libro  libroUpdate){
+	public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody libro  libroUpdate){
 		var libro= libro_Service.findOne(id).get();
 		if (libro != null) {
 			libro.setTitulo_libro(libroUpdate.getTitulo_libro());
