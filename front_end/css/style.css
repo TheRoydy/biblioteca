@@ -1,31 +1,68 @@
 .sidebar {
-    height: 100vh;
-  }
-  
-  .sidebar-heading {
-    font-size: 1.2rem;
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .sidebar ul {
-    padding-left: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px;
-  }
-  
-  .sidebar ul li a {
-    color: #ffffff;
-    text-decoration: none;
-  }
-  
-  .sidebar ul li a:hover {
-    color: #cccccc;
-  }
-  
-  .sidebar ul {
-    margin-top: 20px; /* Añadido espacio entre el nombre de la empresa y los enlaces del menú */
-  }
-  
+  height: 100vh;
+}
+
+.sidebar-heading {
+  font-size: 1.2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.sidebar ul {
+  padding-left: 0;
+}
+
+.sidebar ul li {
+  padding: 10px;
+  margin-top: 18px;
+  margin-left: 37px;
+
+}
+
+.opcion2  {
+  background: #506dff;
+  border-radius: 15px;
+  margin-right: 81px;
+}
+
+.opcion1  {
+  background: #506dff;
+  border-radius: 15px;
+  margin-right: 81px;
+}
+
+.sidebar ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 22px;
+}
+
+.sidebar ul li a:hover {
+  color: #cccccc;
+}
+
+.sidebar ul {
+  margin-top: 20px;
+  /* Añadido espacio entre el nombre de la empresa y los enlaces del menú */
+}
+
+.container.text-center {
+  text-align: left;
+  margin-top: 20px;
+  /* Ajusta esta propiedad para bajar el formulario */
+}
+
+.form-label,
+.form-select,
+.form-control {
+  text-align: left;
+}
+
+.form-label {
+  margin-top: 17px;
+}
+
+.posicion-btn {
+  text-align: center;
+  margin-top: 20px;
+}

@@ -17,16 +17,15 @@
                 <div class="sidebar-heading text-light pt-3 mb-4 custom-blue">
                     <img src="../img/libro.png" class="mr-2" style="height: 100px;"><h1 style="font-size: 35px;">Biblioteca Sena</h1>
                 </div>
-                <ul class="list-unstyled" style="margin-left: 30px;">
-                    <li><a href="../view/inicio.html" class="text-light"><i class="fas fa-chart-line"></i> Inicio</a></li>
-                    <li><a href="../view/libro.html" class="text-light"><i class="fas fa-users"></i> Libros</a></li>
-                    <li><a href="../view/usuarios.html" class="text-light"><i class="fas fa-box"></i> Usuarios</a></li>
-                    <li><a href="../view/prestamos.html" class="text-light"><i class="fas fa-shopping-cart"></i> Préstamos</a></li>
-                    <li><a href="../view/multas.html" class="text-light"><i class="fas fa-shopping-cart"></i> Multas</a></li>
+                <ul class="list-unstyled" style="margin-left: 10px;">
+                    <li><a href="../view/libro.html" class="text-light"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../view/usuarios.html" class="text-light"><i class="fas fa-users"></i> Usuarios</a></li>
+                    <li><a href="../view/prestamos.html" class="text-light"><i class="fas fa-book-reader"></i> Préstamos</a></li>
+                    <li><a href="../view/multas.html" class="text-light"><i class="fas fa-money-bill-wave"></i> Multas</a></li>
                 </ul>
             </div>
             <div class="col-md-10">
-                <h1 class="mt-3">Clientes</h1>
+                <h1 class="mt-3">Libros</h1>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -55,7 +54,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="/Front-end/view/agregar_clientes.html"><button type="button" class="btn btn-success">Añadir Cliente</button></a>
+                        <a href="../view/agregar_libro.html"><button type="button" class="btn btn-success">Añadir Libro</button></a>
                         
                     </div>
                     <div class="col-md-8 text-right">
@@ -69,16 +68,13 @@
                         <table class="table">
                             <thead> 
                                 <tr>
-                                    <th>ID Cliente</th>
-                                    <th>Tipo Identificación</th>
-                                    <th>Identificación</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Teléfono</th>
-                                    <th>Dirección</th>
-                                    <th>Ciudad</th>
-                                    <th>Correo Electronico</th>
-                                    <th>Estado</th>
+                                    <th>ID Libro</th>
+                                    <th>Titulo</th>
+                                    <th>Autor</th>
+                                    <th>Genero</th>
+                                    <th>ISBN</th>
+                                    <th>Libros Disponibles</th>
+                                    <th>Libros Ocupados</th>
                                     <th id="headerAcciones">Acciones</th>
                                 </tr>
                             </thead>
