@@ -1,7 +1,7 @@
 var url = "http://localhost:8080/api/v1/libro/";
 
 
-document.getElementById("titulo_libro").addEventListener("keypress", soloLetras);
+/*document.getElementById("titulo_libro").addEventListener("keypress", soloLetras);
 
 //Este campo solo permite letras
 const letras_y_caracteresPermitidos = [] 
@@ -16,7 +16,7 @@ function soloLetras(event) {
     return;
   }
 
-}
+}*/
 
 function listarLibros() {
   //METODO PARA LISTAR LOS CLIENTES
@@ -159,7 +159,7 @@ function actualizarLibro() {
       "autor_libro": document.getElementById("autor_libro").value,
       "genero_libro": document.getElementById("genero_libro").value,
       "codigo_ISBN": document.getElementById("codigo_ISBN").value,     
-      "libros_disponibles": document.getElementById("libros_ocupados").value,
+      "libros_disponibles": document.getElementById("libros_disponibles").value,
       "libros_ocupados": document.getElementById("libros_ocupados").value
 };
 
@@ -179,8 +179,7 @@ if (validarCampos()) {
               text: "Se guardó correctamente",
               icon: "success"
             });
-          // Puedes hacer algo adicional como recargar la lista de libros
-          listarLibro();
+            listarLibros(); // Recargar la lista después de eliminar
       },
       error: function(error) {
           // Manejar el error de la petición
