@@ -25,23 +25,23 @@
                 </ul>
             </div>
             <div class="container">
-                <h1 style="margin-top: 100px">Añadir Cliente</h1>
+                <h1 style="margin-top: 100px">Añadir Libro</h1>
                 <h6>Todos los campos son obligatorios</h6>
                 <br>
                 <div class="row">
                     <div class="col col-xl-6 col-12">
                         <b><label for="titulo">Título *</label></b>
-                        <input type="text" id="titulo" class="form-control" onfocusout="validarTitulo(this);" />
+                        <input type="text" id="titulo_libro" class="form-control" onfocusout="validarTitulo(this);" />
                     </div>
 
                     <div class="col col-xl-6 col-12">
                         <b><label for="autor">Autor *</label></b>
-                        <input type="text" id="autor" class="form-control" onfocusout="validarAutor(this);" />
+                        <input type="text" id="autor_libro" class="form-control" onfocusout="validarAutor(this);" />
                     </div>
                     
                     <div class="col col-xl-6 col-12">
                         <b><label for="Genero">Género *</label></b>
-                        <select class="form-control" id="Genero" required>
+                        <select class="form-control" id="genero_libro" required>
                             <option selected disabled>Seleccione el tipo de género:</option>
                             <option value="aventura">Aventura</option>
                             <option value="biografia">Biografía</option>
@@ -83,20 +83,20 @@
                     
                     <div class="col col-xl-6 col-12">
                         <b><label for="isbn">ISBN *</label></b>
-                        <input type="number" id="isbn" class="form-control" onfocusout="validarIsbn(this);" />
+                        <input type="number" id="codigo_ISBN" class="form-control" onfocusout="validarIsbn(this);" />
                     </div>
                     <div class="col col-xl-6 col-12">
                         <b><label for="l_disponibles">Libros Disponibles *</label></b>
-                        <input type="number" id="l_disponibles" class="form-control" onfocusout="validarLi_Disponibles(this);" />
+                        <input type="number" id="libros_disponibles" class="form-control" onfocusout="validarLi_Disponibles(this);" />
                     </div>
                     <div class="col col-xl-6 col-12">
                         <b><label for="l_ocupados">Libros Ocupados *</label></b>
-                        <input type="number" id="l_ocupados" class="form-control" onfocusout="validarLi_Ocupados(this);" />
+                        <input type="number" id="libros_ocupados" class="form-control" onfocusout="validarLi_Ocupados(this);" />
                     </div>
                 </div>
                 <br>
                 <button class="btn btn-success" onclick="registrarLibro();">
-                    Agregar Libros
+                    Agregar Libro
                 </button>
                 <button class="btn btn-primary" onclick="limpiarFormulario();">
                     Limpiar Formulario
@@ -109,6 +109,6 @@
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="/Front-end/js/index.js"></script>
+        <script src="../js/libro.js"></script>
     </body>
 </html>

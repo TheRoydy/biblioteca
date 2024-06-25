@@ -22,13 +22,15 @@ public class libro {
     @Column(name = "autor_libro", nullable = false, length = 100)
     private String autor_libro;
 
-    @Column(name = "codigo_ISBN", nullable = false, length = 15)
-    private String codigo_ISBN;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "genero_libro", nullable = false, length = 50)
     private genero_libro genero_libro;
 
+
+    @Column(name = "codigo_ISBN", nullable = false, length = 15)
+    private String codigo_ISBN;
+
+    
     @Column(name = "libros_disponible", nullable = false, length = 50) //Esta opción es para la cantidad de libros disponibles
     private String libros_disponibles;
 
@@ -36,33 +38,39 @@ public class libro {
     private String libros_ocupados;
 
     public enum genero_libro{
-        Aventura,
-        Biografia,
-        Ciencia_Ficcion,
-        Crimen,
-        Drama,
-        Ensayo,
-        Fantasia,
-        Historico,
-        Humor,
-        Infantil,
-        Juvenil,
-        Misterio,
-        Novela,
-        Poesia,
-        Romance,
-        Suspenso,
-        Terror,
-        Accion,
-        Amor,
-        Cuento,
-        Fabula,
-        Filosofico,
-        Guerra,
-        Lirico,
-        Musical,
-        Periodistico,
-        Realista
+        aventura,
+        biografia,
+        ciencia_ficcion,
+        crimen,
+        drama,
+        ensayo,
+        fantasia,
+        historico,
+        humor,
+        infantil,
+        juvenil,
+        misterio,
+        novela,
+        poesia,
+        romance,
+        suspenso,
+        terror,
+        accion,
+        amor,
+        cuento,
+        fabula,
+        filosofico,
+        guerra,
+        lirico,
+        musical,
+        periodistico,
+        realista;
+
+        public Object toLowerCase() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'toLowerCase'");
+        }
+
     }
 
     public libro() {
