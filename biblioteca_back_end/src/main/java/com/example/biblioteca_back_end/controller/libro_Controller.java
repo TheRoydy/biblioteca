@@ -81,7 +81,7 @@ public class libro_Controller {
 	
 	
 	@GetMapping("/{id_libro}")
-	public ResponseEntity<Object> findOne(@PathVariable("id") String id){
+	public ResponseEntity<Object> findOne(@PathVariable("id_libro") String id){
 		var libro=libro_Service.findOne(id);
 		return new ResponseEntity<>(libro,HttpStatus.OK);
 	}
@@ -94,7 +94,7 @@ public class libro_Controller {
 	}
     
     @PutMapping("/{id_libro}")
-	public ResponseEntity<Object> update(@PathVariable("id") String id, @RequestBody libro  libroUpdate){
+	public ResponseEntity<Object> update(@PathVariable("id_libro") String id, @RequestBody libro  libroUpdate){
 		var libro= libro_Service.findOne(id).get();
 		if (libro != null) {
 			libro.setTitulo_libro(libroUpdate.getTitulo_libro());

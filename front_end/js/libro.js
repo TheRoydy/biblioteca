@@ -1,5 +1,23 @@
 var url = "http://localhost:8080/api/v1/libro/";
 
+
+document.getElementById("titulo_libro").addEventListener("keypress", soloLetras);
+
+//Este campo solo permite letras
+const letras_y_caracteresPermitidos = [] 
+
+
+function soloLetras(event) {
+  console.log("Llave presionada. " + event.key);
+  console.log("Codigo tecla: "+event.keyCode);
+  //se debe ajustar para aceptar mayusculas, minusculas, espacios, ñ
+  if (!(letras_y_caracteresPermitidos.includes(event.key))){
+    event.preventDefault();
+    return;
+  }
+
+}
+
 function listarLibros() {
   //METODO PARA LISTAR LOS CLIENTES
   //SE CREA LA PETICION AJAX
@@ -34,15 +52,15 @@ function listarLibros() {
         let celdaAcciones = document.createElement("td")
         celdaAcciones.style.textAlign = "center";
 
-        var headerAcciones = document.getElementById("headerAcciones"); 
+        var headerAcciones = document.getElementById("headerAcciones");
         headerAcciones.style.textAlign = "center";
 
         let botonEditarLibro = document.createElement("button");
         botonEditarLibro.value = result[i]["id_libro"];
         botonEditarLibro.innerHTML = "Editar";
         botonEditarLibro.onclick = function (e) {
-          $('#exampleModal').modal('show');
-          consultarClienteID(this.value);
+          $('#editarLibroModal').modal('show');
+          consultarLibroID(this.value);
         }
         botonEditarLibro.className = "btn btn-warning editar_libro";
 
@@ -53,15 +71,6 @@ function listarLibros() {
           eliminarLibro(this.value);
         }
         botonEliminar.className = "btn btn-danger eliminar";
-
-        /*let botonCambiar_estado = document.createElement("button");
-        botonCambiar_estado.value = result[i]["id_cliente"];
-        botonCambiar_estado.innerHTML = "Estado";
-        botonCambiar_estado.onclick = function (e) {
-          $('#exampleModal').modal('show');
-          consultarClienteID(this.value);
-        }
-        botonCambiar_estado.className = "btn btn-primary cambiar_estado";*/
 
         celdaID_Libro.innerText = result[i]["id_libro"];
         celdaTitulo.innerText = result[i]["titulo_libro"];
@@ -97,7 +106,7 @@ function consultarLibroID(id) {
     url: url + id,
     type: "GET",
     success: function (result) {
-      document.getElementById("id_libro").value = result["id_cliente"];
+      document.getElementById("id_libro").value = result["id_libro"];
       document.getElementById("titulo_libro").value = result["titulo_libro"];
       document.getElementById("autor_libro").value = result["autor_libro"];
       document.getElementById("genero_libro").value = result["genero_libro"];
@@ -139,31 +148,65 @@ function eliminarLibro(id) {
   });
 }
 
-/*function cambiarEstadoCliente() {
-  var idCliente = document.getElementById("id_cliente").value;
-  var nuevoEstado = document.getElementById("estadoCliente").value;
+function actualizarLibro(idlibro) {
+  var titulo_libro = document.getElementById("editTitulo_libro").value;
+  var autor_libro = document.getElementById("editAutor_libro").value;
+  var genero_libro = document.getElementById("editGenero_libro").value;
+  var codigo_ISBN = document.getElementById("editCodigo_ISBN").value;
+  var libros_disponibles = document.getElementById("editLibros_disponibles").value;
+  var libros_ocupados = document.getElementById("editLibros_ocupados").value;
 
   var formData = {
-      "estado": nuevoEstado
+      "titulo_libro": titulo_libro,
+      "autor_libro": autor_libro,
+      "genero_libro": genero_libro, 
+      "codigo_ISBN": codigo_ISBN,
+      "libros_disponibles": libros_disponibles,
+      "libros_ocupados": libros_ocupados
   };
 
   $.ajax({
-      url: url + idCliente,
-      type: "PUT",
-      data: formData,
+      url: url + idlibro,
+      type: "PUT", 
+      data: JSON.stringify(formData),
+      contentType: "application/json",
       success: function (result) {
           Swal.fire({
-              title: "¡Estado cambiado!",
-              text: "El estado del cliente se ha actualizado correctamente.",
+              title: "¡Actualizado!",
+              text: "El libro ha sido actualizado correctamente.",
               icon: "success"
           });
-          $('#cambiarEstadoModal').modal('hide');
-          listarClientes(); // Recargar la lista después de cambiar el estado
+          $('#editarLibroModal').modal('hide');
+          listaLibro();
       },
       error: function (error) {
-          Swal.fire("Error", "Error al cambiar el estado del cliente, " + error.responseText, "error");
-      },
+          console.error("Error al actualizar el libro:", error);
+          Swal.fire({
+              title: "Error",
+              text: "Ocurrió un error al actualizar el libro. Por favor, inténtelo de nuevo.",
+              icon: "error"
+          });
+      }
   });
+}
+
+  /*function validarCampos() {
+    // Obtener los valores de los campos
+    var titulo_libro = document.getElementById("titulo_libro").value;
+    var autor_libro = document.getElementById("autor_libro").value;
+    var genero_libro = document.getElementById("genero_libro").value;
+    var codigo_ISBN = document.getElementById("codigo_ISBN").value;
+    var libros_disponibles = document.getElementById("libros_disponibles").value;
+    var libros_ocupados = document.getElementById("libros_ocupados").value
+  
+    // Verificar si algún campo está vacío
+    if (titulo_libro === '' || autor_libro === ''  || genero_libro === '' || codigo_ISBN === ''|| libros_disponibles === '' || libros_ocupados === '') {
+      return false; // Al menos un campo está vacío
+    } else {
+      return true; // Todos los campos están llenos
+    }
+  }
+  
 }*/
 
 function validarCampos() {
@@ -194,9 +237,9 @@ function validarCampos() {
   if (!validarLibros_Ocupados(libros_ocupados)) {
     camposValidos = false;
 
-  return camposValidos;
+    return camposValidos;
   }
-}  
+}
 
 function registrarLibro() {
 
@@ -232,8 +275,8 @@ function registrarLibro() {
     $.ajax({
       url: url,
       type: "POST",
-      contentType:"application/json",
-      data:JSON.stringify(formData),
+      contentType: "application/json",
+      data: JSON.stringify(formData),
       success: function (result) {
         Swal.fire({
           title: "¡Excelente!",
@@ -256,37 +299,6 @@ function registrarLibro() {
   }
 
 }
-
-/*function validarCampos() {
-  var identificacion = document.getElementById("identificacion");
-  return validarIdentificacion(identificacion);
-}
-function validarIdentificacion(cuadroNumero) {
-  /*
-  numero documento 
-  min=5
-  max=11
-  numero entero
-
-  si cumple, se cambia color a verde
-  si no, se cambia a rojo
-  */
-  /*var valor = cuadroNumero.value;
-  var valido = true;
-  if (valor.length < 5 || valor.length > 11) {
-    valido = false
-  }
-
-  if (valido) {
-    //cuadro de texto cumple
-    cuadroNumero.className = "form-control is-valid";
-  } else {
-    //cuadro de texto no cumple
-    cuadroNumero.className = "form-control is-invalid";
-  }
-  return valido;
-
-}*/
 
 //validar Titulo
 function validarCampos() {
@@ -361,35 +373,35 @@ function validarGenero(cuadroNumero) {
 
 //validar ISBN
 function validarCampos() {
-    var codigo_ISBN = document.getElementById("codigo_ISBN");
-    return validarIsbn(codigo_ISBN);
+  var codigo_ISBN = document.getElementById("codigo_ISBN");
+  return validarIsbn(codigo_ISBN);
+}
+function validarIsbn(cuadroNumero) {
+  /*
+  numero documento 
+  min=5
+  max=11
+  numero entero
+ 
+  si cumple, se cambia color a verde
+  si no, se cambia a rojo
+  */
+  var valor = cuadroNumero.value;
+  var valido = true;
+  if (valor.length < 5 || valor.length > 11) {
+    valido = false
   }
-  function validarIsbn(cuadroNumero) {
-    /*
-    numero documento 
-    min=5
-    max=11
-    numero entero
-  
-    si cumple, se cambia color a verde
-    si no, se cambia a rojo
-    */
-    var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 5 || valor.length > 11) {
-      valido = false
-    }
-  
-    if (valido) {
-      //cuadro de texto cumple
-      cuadroNumero.className = "form-control is-valid";
-    } else {
-      //cuadro de texto no cumple
-      cuadroNumero.className = "form-control is-invalid";
-    }
-    return valido;
-  
+
+  if (valido) {
+    //cuadro de texto cumple
+    cuadroNumero.className = "form-control is-valid";
+  } else {
+    //cuadro de texto no cumple
+    cuadroNumero.className = "form-control is-invalid";
   }
+  return valido;
+
+}
 
 //validar Libros Disponibles
 function validarCampos() {
