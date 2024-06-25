@@ -55,6 +55,7 @@ function listarLibros() {
         var headerAcciones = document.getElementById("headerAcciones");
         headerAcciones.style.textAlign = "center";
 
+        //Para traer el modal
         let botonEditarLibro = document.createElement("button");
         botonEditarLibro.value = result[i]["id_libro"];
         botonEditarLibro.innerHTML = "Editar";
@@ -101,6 +102,7 @@ function listarLibros() {
   });
 }
 
+//funcion para consultar libro
 function consultarLibroID(id){
   //alert(id);
   $.ajax({
@@ -118,6 +120,7 @@ function consultarLibroID(id){
   });
 }
 
+//funcion para poder eliminar un usuario
 function eliminarLibro(id) {
   Swal.fire({
     title: "¿Estás seguro?",
@@ -148,6 +151,7 @@ function eliminarLibro(id) {
   });
 }
 
+//Funcion para poder actualizar el libro
 function actualizarLibro() { 
   var id_libro=document.getElementById("id_libro").value
   let formData={
@@ -163,7 +167,8 @@ if (validarCampos()) {
   $.ajax({
       url:url+id_libro,
       type: "PUT",
-      data: formData,
+      contentType:"application/json",
+      data:JSON.stringify(formData),
     
       
       success: function(result) {
