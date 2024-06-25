@@ -50,7 +50,7 @@ public class libro {
         infantil,
         juvenil,
         misterio,
-        novela,
+        novela_negra,
         poesia,
         romance,
         suspenso,
@@ -64,7 +64,8 @@ public class libro {
         lirico,
         musical,
         periodistico,
-        realista;
+        realista,
+        otro;
 
         public Object toLowerCase() {
             // TODO Auto-generated method stub
