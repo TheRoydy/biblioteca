@@ -75,91 +75,59 @@
     </div>
 
 
-    <!-- Modal para editar el libro -->
-    <div class="modal fade" id="editarLibroModal" tabindex="-1" role="dialog" aria-labelledby="editarLibroLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editarLibroLabel">Editar Libro</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="editarLibroForm">
-                        <div class="form-group">
-                            <label for="libroTitulo">Título</label>
-                            <input type="text" class="form-control" id="editTitulo_libro" placeholder="Título del libro">
-                        </div>
-                        <div class="form-group">
-                            <label for="libroAutor">Autor</label>
-                            <input type="text" class="form-control" id="editAutor_libro" placeholder="Autor del libro">
-                        </div>
-                        <div class="form-group">
-                            <label for="libroGenero">Género</label>
-                            <select class="form-control" id="editGenero_libro">
-                                <option value="aventura">Aventura</option>
-                                <option value="biografia">Biografía</option>
-                                <option value="ciencia_ficcion">Ciencia Ficción</option>
-                                <option value="crimen">Crimen</option>
-                                <option value="drama">Drama</option>
-                                <option value="ensayo">Ensayo</option>
-                                <option value="fantasia">Fantasía</option>
-                                <option value="historico">Histórico</option>
-                                <option value="humor">Humor</option>
-                                <option value="infantil">Infantil</option>
-                                <option value="juvenil">Juvenil</option>
-                                <option value="misterio">Misterio</option>
-                                <option value="novela_negra">Novela Negra</option>
-                                <option value="poesia">Poesía</option>
-                                <option value="romance">Romance</option>
-                                <option value="suspense">Suspense</option>
-                                <option value="terror">Terror</option>
-                                <option value="thriller">Thriller</option>
-                                <option value="accion">Acción</option>
-                                <option value="amor">Amor</option>
-                                <option value="cuento">Cuento</option>
-                                <option value="didactico">Didáctico</option>
-                                <option value="distopia">Distopía</option>
-                                <option value="epico">Épico</option>
-                                <option value="erotico">Erótico</option>
-                                <option value="fabula">Fábula</option>
-                                <option value="filosofico">Filosófico</option>
-                                <option value="guerra">Guerra</option>
-                                <option value="legal">Legal</option>
-                                <option value="lirico">Lírico</option>
-                                <option value="musical">Musical</option>
-                                <option value="naturalista">Naturalista</option>
-                                <option value="periodistico">Periodístico</option>
-                                <option value="psicologico">Psicológico</option>
-                                <option value="realista">Realista</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="libroISBN">ISBN</label>
-                            <input type="text" class="form-control" id="editCodigo_ISBN" placeholder="Código ISBN">
-                        </div>
-                        <div class="form-group">
-                            <label for="librosDisponibles">Libros Disponibles</label>
-                            <input type="number" class="form-control" id="editLibros_disponibles"
-                                placeholder="Cantidad de libros disponibles">
-                        </div>
-                        <div class="form-group">
-                            <label for="librosOcupados">Libros Ocupados</label>
-                            <input type="number" class="form-control" id="editLibros_ocupados"
-                                placeholder="Cantidad de libros ocupados">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="actualizarLibro()">Guardar
-                        Cambios</button>
-                </div>
-            </div>
+    <!-- Modal -->
+  <div class="modal fade" id="EditarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar libro</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
+        <div class="modal-body">
+          <div class="row">
+            <h6>Todos los campos con asterisco son obligatorios *</h6>
+            <input id="id_libro" type="hidden">
+            <div class="col col-xl-6 col-12">
+                <b><label for="">Título libro *</label></b>
+                <input type="text" id="titulo_libro" class="form-control" onfocusout="validarTitulo_libro(this);" />
+            </div>
 
+            <div class="col col-xl-6 col-12">
+                <b><label for="">Autor libro *</label></b>
+                <input type="text" id="autor_libro" class="form-control" onfocusout="validarAutor_libro(this);" />
+            </div>
+
+            <div class="col col-xl-6 col-12">
+                <b><label for="">Genero libro *</label></b>
+                <input type="text" id="genero_libro" class="form-control" onfocusout="validarGenero_libro(this);" />
+            </div>
+
+            <div class="col col-xl-6 col-12">
+                <b><label for="">ISBN  *</label></b>
+                <input type="number" id="codigo_ISBN" step="1" class="form-control"
+                    onfocusout="validarIsbn(this);" />
+            </div>
+            
+            <div class="col col-xl-6 col-12">
+                <b><label for="">Numero ejemplares disponibles *</label></b>
+                <input type="number" id="libros_disponibles" step="1" class="form-control"
+                    onfocusout="validarLi_Disponibles(this);" />
+            </div>
+            <div class="col col-xl-6 col-12">
+                <b><label for="">Numero ejemplares ocupados *</label></b>
+                <input type="text" id="libros_ocupados" class="form-control"
+                    onfocusout="validarLi_Ocupados(this);" />
+            </div>
+            
+        </div>
+          <button type="button" class="btn btn-primary" onclick="actualizarLibro();">Actualizar</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

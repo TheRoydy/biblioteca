@@ -59,7 +59,7 @@ function listarLibros() {
         botonEditarLibro.value = result[i]["id_libro"];
         botonEditarLibro.innerHTML = "Editar";
         botonEditarLibro.onclick = function (e) {
-          $('#editarLibroModal').modal('show');
+          $('#EditarModal').modal('show');
           consultarLibroID(this.value);
         }
         botonEditarLibro.className = "btn btn-warning editar_libro";
@@ -101,20 +101,20 @@ function listarLibros() {
   });
 }
 
-function consultarLibroID(id) {
+function consultarLibroID(id){
+  //alert(id);
   $.ajax({
-    url: url + id,
-    type: "GET",
-    success: function (result) {
-      document.getElementById("id_libro").value = result["id_libro"];
-      document.getElementById("titulo_libro").value = result["titulo_libro"];
-      document.getElementById("autor_libro").value = result["autor_libro"];
-      document.getElementById("genero_libro").value = result["genero_libro"];
-      document.getElementById("codigo_ISBN").value = result["codigo_ISBN"];
-      document.getElementById("libros_disponibles").value = result["libros_disponibles"];
-      document.getElementById("libros_ocupados").value = result["libros_ocupados"];
-      document.getElementById("acciones").value = result["acciones"];
-    }
+      url:url+id,
+      type:"GET",
+      success: function(result){
+          document.getElementById("id_libro").value=result["id_libro"];
+          document.getElementById("titulo_libro").value=result["titulo_libro"];
+          document.getElementById("autor_libro").value=result["autor_libro"];
+          document.getElementById("genero_libro").value=result["genero_libro"];
+          document.getElementById("codigo_ISBN").value=result["codigo_ISBN"];
+          document.getElementById("libros_disponibles").value=result["libros_disponibles"];
+          document.getElementById("libros_ocupados").value=result["libros_ocupados"];
+      }
   });
 }
 
@@ -148,49 +148,55 @@ function eliminarLibro(id) {
   });
 }
 
-function actualizarLibro(idlibro) {
-  var titulo_libro = document.getElementById("editTitulo_libro").value;
-  var autor_libro = document.getElementById("editAutor_libro").value;
-  var genero_libro = document.getElementById("editGenero_libro").value;
-  var codigo_ISBN = document.getElementById("editCodigo_ISBN").value;
-  var libros_disponibles = document.getElementById("editLibros_disponibles").value;
-  var libros_ocupados = document.getElementById("editLibros_ocupados").value;
+function actualizarLibro() { 
+  var id_libro=document.getElementById("id_libro").value
+  let formData={
+      "titulo_libro": document.getElementById("titulo_libro").value,
+      "autor_libro": document.getElementById("autor_libro").value,
+      "genero_libro": document.getElementById("genero_libro").value,
+      "codigo_ISBN": document.getElementById("codigo_ISBN").value,     
+      "libros_disponibles": document.getElementById("libros_ocupados").value,
+      "libros_ocupados": document.getElementById("libros_ocupados").value
+};
 
-  var formData = {
-      "titulo_libro": titulo_libro,
-      "autor_libro": autor_libro,
-      "genero_libro": genero_libro, 
-      "codigo_ISBN": codigo_ISBN,
-      "libros_disponibles": libros_disponibles,
-      "libros_ocupados": libros_ocupados
-  };
-
+if (validarCampos()) {
   $.ajax({
-      url: url + idlibro,
-      type: "PUT", 
-      data: JSON.stringify(formData),
-      contentType: "application/json",
-      success: function (result) {
+      url:url+id_libro,
+      type: "PUT",
+      data: formData,
+    
+      
+      success: function(result) {
+        
+          // Manejar la respuesta exitosa según necesites
           Swal.fire({
-              title: "¡Actualizado!",
-              text: "El libro ha sido actualizado correctamente.",
+              title: "¡Excelente!",
+              text: "Se guardó correctamente",
               icon: "success"
-          });
-          $('#editarLibroModal').modal('hide');
-          listaLibro();
+            });
+          // Puedes hacer algo adicional como recargar la lista de libros
+          listarLibro();
+      },
+      error: function(error) {
+          // Manejar el error de la petición
+          Swal.fire({
+              title: "¡Error!",
+              text: "No se guardó",
+              icon: "error"
+            });
       },
       error: function (error) {
-          console.error("Error al actualizar el libro:", error);
-          Swal.fire({
-              title: "Error",
-              text: "Ocurrió un error al actualizar el libro. Por favor, inténtelo de nuevo.",
-              icon: "error"
-          });
-      }
+        Swal.fire("Error", "Error al guardar, " + error.responseText, "error");
+    }
   });
-}
-
-  /*function validarCampos() {
+  } else {
+  Swal.fire({
+      title: "¡Error!",
+      text: "Llene todos los campos correctamente",
+      icon: "error"
+    });
+  }
+  function validarCampos() {
     // Obtener los valores de los campos
     var titulo_libro = document.getElementById("titulo_libro").value;
     var autor_libro = document.getElementById("autor_libro").value;
@@ -207,7 +213,7 @@ function actualizarLibro(idlibro) {
     }
   }
   
-}*/
+}
 
 function validarCampos() {
   var titulo_libro = document.getElementById("titulo_libro").value;
