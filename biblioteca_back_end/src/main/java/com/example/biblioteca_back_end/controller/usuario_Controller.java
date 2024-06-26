@@ -72,7 +72,7 @@ public class usuario_Controller {
         return new ResponseEntity<>(listaUsuarios,HttpStatus.OK);
     }
 
-    @GetMapping("/id_usuario")
+    @GetMapping("/{id_usuario}")
     public ResponseEntity<Object> findOne(@PathVariable("id_usuario") String id) {
         var usuario = usuario_Service.findOne(id);
         return new ResponseEntity<>(usuario,HttpStatus.OK);

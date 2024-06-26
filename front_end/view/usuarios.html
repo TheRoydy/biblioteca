@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Sena</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body onload="listarUsuarios();">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 bg-dark sidebar">
+                <div class="sidebar-heading text-light pt-3 mb-4 custom-blue">
+                    <img src="../img/libro.png" class="mr-2" style="height: 100px;">
+                    <h1 style="font-size: 35px;">Biblioteca Sena</h1>
+                </div>
+                <ul class="list-unstyled" style="margin-left: 10px;">
+                    <li><a href="../view/libro.html" class="text-light"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../view/usuarios.html" class="text-light"><i class="fas fa-users"></i> Usuarios</a>
+                    </li>
+                    <li><a href="../view/prestamos.html" class="text-light"><i class="fas fa-book-reader"></i>
+                            Préstamos</a></li>
+                    <li><a href="../view/multas.html" class="text-light"><i class="fas fa-money-bill-wave"></i>
+                            Multas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <h1 class="mt-3">Usuarios</h1>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="../view/agregar_usuario.html"><button type="button" class="btn btn-success"
+                                style="margin-top: 10px;">Añadir Usuario</button></a>
+
+                    </div>
+                    <div class="col-md-8 text-right">
+                        <div class="form-inline  justify-content-end">
+                            <input type="search" class="form-control mr-2" id="inputSearch" placeholder="Buscar"
+                                style="margin-top: 10px;">
+                            <button type="button" class="btn btn-primary ml-2" onclick="listarUsuarios();"
+                                style="margin-top: 10px;">Aplicar Filtro</button>
+                        </div>
+                    </div>
+                </div>
+                <hr> <!-- Línea horizontal debajo de los botones -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Usuario</th>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                    <th>Correo</th>
+                                    <th>Tipo de Usuario</th>
+                                    <th id="headerAcciones">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoTabla">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   <!-- Modal para editar el libro -->
+   <div class="modal fade" id="EditarModal" tabindex="-1" role="dialog" aria-labelledby="editarUsuarioLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="editarUsuarioLabel">Editar Usuario</h5>
+               <input id="id_usuario" type="hidden">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body">
+               <form id="editarUsuarioForm">
+                   <div class="form-group">
+                       <label for="nombre">Nombre</label>
+                       <input type="text" class="form-control" id="nombre_usuario" placeholder="Nombre del usuario">
+                   </div>
+                   <div class="form-group">
+                       <label for="direccion">Dirección</label>
+                       <input type="text" class="form-control" id="direccion_usuario" placeholder="Direccion del usuario">
+                   </div>
+                   <div class="form-group">
+                    <label for="correo">Correo</label>
+                    <input type="text" class="form-control" id="correo_usuario" placeholder="Correo">
+                </div>
+                   <div class="form-group">
+                       <label for="tipo_usuario">Tipo de Usuario</label>
+                       <select class="form-control" id="tipo_usuario">
+                           <option value="lector">Lector</option>
+                           <option value="bibliotecario">Bibliotecario</option>
+                           <option value="administrador">Administrador</option>
+                       </select>
+                   </div>
+               </form>
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onclick="actualizarUsuario()">Guardar
+                   Cambios</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/usuario.js"></script>
+
+</body>
+
+</html>
