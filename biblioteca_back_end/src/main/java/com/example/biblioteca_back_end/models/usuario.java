@@ -2,12 +2,14 @@ package com.example.biblioteca_back_end.models;
 
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+@Entity
 public class usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,7 +27,7 @@ public class usuario {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_usuario", nullable = false, length = 30)
-    private String tipo_usuario;
+    private tipo_usuario tipo_usuario;
 
     public enum tipo_usuario{
         lector,
@@ -37,7 +39,7 @@ public class usuario {
     }
 
     public usuario(String id_usuario, String nombre_usuario, String direccion_usuario, String correo_usuario,
-            String tipo_usuario) {
+            com.example.biblioteca_back_end.models.usuario.tipo_usuario tipo_usuario) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.direccion_usuario = direccion_usuario;
@@ -77,12 +79,14 @@ public class usuario {
         this.correo_usuario = correo_usuario;
     }
 
-    public String getTipo_usuario() {
+    public tipo_usuario getTipo_usuario() {
         return tipo_usuario;
     }
 
-    public void setTipo_usuario(String tipo_usuario) {
+    public void setTipo_usuario(tipo_usuario tipo_usuario) {
         this.tipo_usuario = tipo_usuario;
     }
+
+    
 
 }
