@@ -10,8 +10,7 @@ import com.example.biblioteca_back_end.models.libro;
 
 @Repository
 public interface I_Libro extends CrudRepository<libro, String> {
-    //falta hacer los filtro para libro, no olvidar
-
+    
     @Query("SELECT li FROM libro li WHERE "
             + "li.titulo_libro LIKE %?1% OR "
 			+ "li.autor_libro LIKE %?1% OR "
