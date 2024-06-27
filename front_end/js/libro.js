@@ -285,24 +285,22 @@ function registrarLibro() {
   };
 
   let camposValidos = true;
+  let camposRequeridos = [
+    "titulo_libro",
+    "autor_libro",
+    "genero_libro",
+    "codigo_ISBN",
+    "libros_disponibles",
+    "libros_ocupados",
+
+  ];
   let mensajeError = "";
 
   // Validar cada campo requerido
-  if (!validarTitulo(document.getElementById("titulo_libro"))) {
-    camposValidos = false;
-    mensajeError += "El título del libro es inválido. ";
-  }
-  if (!validarAutor(document.getElementById("autor_libro"))) {
-    camposValidos = false;
-    mensajeError += "El autor del libro es inválido. ";
-  }
-  if (!validarGenero(document.getElementById("genero_libro"))) {
-    camposValidos = false;
-    mensajeError += "El género del libro es inválido. ";
-  }
+ 
   if (!validarIsbn(document.getElementById("codigo_ISBN"))) {
     camposValidos = false;
-    mensajeError += "El código ISBN debe ser un número no negativo y de longitud entre 10 y 13 caracteres. ";
+    mensajeError += "El código ISBN debe ser un número no negativo y de longitud de 13 caracteres. ";
   }
   if (!validarLi_Disponibles(document.getElementById("libros_disponibles"))) {
     camposValidos = false;
@@ -418,7 +416,7 @@ function validarIsbn(cuadroNumero) {
   var valido = true;
 
   // Verificar si es un número, si es negativo o si la longitud no es la adecuada
-  if (isNaN(valor) || valor < 0 || valor.length < 10 || valor.length > 13) {
+  if (isNaN(valor) || valor < 0 || valor.length < 13) {
     valido = false;
   }
 
