@@ -78,9 +78,10 @@ function listarLibros() {
         botonDetalleLibro.innerText = "Detalles";
         botonDetalleLibro.className = "btn btn-info detalles_libro";
         botonDetalleLibro.onclick = function (e) {
-          $('#detalleLibro').modal('show');
+          $('#ModalDetalleLibro').modal('show');
           detalleLibro(this.value);
         };
+
 
         celdaID_Libro.innerText = result[i]["id_libro"];
         celdaTitulo.innerText = result[i]["titulo_libro"];
@@ -114,14 +115,14 @@ function listarLibros() {
 
 //funcion para traer los datos de libro
 function detalleLibro(libro) {
-
-  document.getElementById('id_libro').value = libro.id_libro || '';
-  document.getElementById('titulo_libro').value = libro.titulo_libro || '';
-  document.getElementById('autor_libro').value = libro.autor_libro || '';
-  document.getElementById('genero_libro').value = libro.genero_libro || '';
-  document.getElementById('codigo_ISBN').value = libro.codigo_ISBN || '';
-  document.getElementById('libros_disponibles').value = libro.libros_disponibles || '';
-  document.getElementById('libros_ocupados').value = libro.libros_ocupados || '';
+   
+  document.getElementById("id_libro").value = libro.id_libro || '';
+  document.getElementById("titulo_libro").value = libro.titulo_libro || '';
+  document.getElementById("autor_libro").value = libro.autor_libro || '';
+  document.getElementById("genero_libro").value = libro.genero-libro || '';
+  document.getElementById("codigo_ISBN").value = libro.codigo_ISBN || '';
+  document.getElementById("libros_disponibles").value = libro.libros_disponibles || '';
+  document.getElementById("libros_ocupados").value = libro.libros_ocupados || '';
 }
 
 //funcion para consultar libro

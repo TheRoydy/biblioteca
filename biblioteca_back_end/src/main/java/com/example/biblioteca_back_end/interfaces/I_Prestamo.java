@@ -13,7 +13,8 @@ public interface I_Prestamo extends CrudRepository <prestamo, String> {
     
     @Query("SELECT pre FROM prestamo pre JOIN "
             + " pre.usuario usua "
-            + " WHERE usa.nombre_usuario LIKE %?1% "
+            + " JOIN pre.libro li "
+            + " WHERE usua.nombre_usuario LIKE %?1% "
             + " OR li.titulo_libro LIKE %?1% "
             + " OR pre.fecha_prestamo= ?1 "
             + " OR pre.fecha_devolucion= ?1 "
