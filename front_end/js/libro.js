@@ -73,11 +73,10 @@ function listarLibros() {
         }
         botonEliminar.className = "btn btn-danger eliminar";
 
-
         let botonDetalleLibro = document.createElement("button");
-        botonEliminar.value = result[i]["id_libro"];
+        botonDetalleLibro.value = result[i]["id_libro"];
         botonDetalleLibro.innerText = "Detalles";
-        botonDetalleLibro.className = "btn btn-primary detalles_libro";
+        botonDetalleLibro.className = "btn btn-info detalles_libro";
         botonDetalleLibro.onclick = function (e) {
           $('#detalleLibro').modal('show');
           detalleLibro(this.value);
@@ -111,6 +110,18 @@ function listarLibros() {
       alert("Error en la petición " + error);
     }
   });
+}
+
+//funcion para traer los datos de libro
+function detalleLibro(libro) {
+
+  document.getElementById('id_libro').value = libro.id_libro || '';
+  document.getElementById('titulo_libro').value = libro.titulo_libro || '';
+  document.getElementById('autor_libro').value = libro.autor_libro || '';
+  document.getElementById('genero_libro').value = libro.genero_libro || '';
+  document.getElementById('codigo_ISBN').value = libro.codigo_ISBN || '';
+  document.getElementById('libros_disponibles').value = libro.libros_disponibles || '';
+  document.getElementById('libros_ocupados').value = libro.libros_ocupados || '';
 }
 
 //funcion para consultar libro
@@ -229,29 +240,6 @@ function actualizarLibro() {
   }
 
 }
-
-function detalleLibro() {
-  var id_libro = document.getElementById("id_libro").value
-  let formData = {
-    "titulo_libro": document.getElementById("titulo_libro").value,
-    "autor_libro": document.getElementById("autor_libro").value,
-    "genero_libro": document.getElementById("genero_libro").value,
-    "codigo_ISBN": document.getElementById("codigo_ISBN").value,
-    "libros_disponibles": document.getElementById("libros_disponibles").value,
-    "libros_ocupados": document.getElementById("libros_ocupados").value
-  };
-
-   {
-    $.ajax({
-      url: url + id_libro,
-      type: "GET",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-    });
-  } 
-
-}
-
 
 function validarCampos() {
   var titulo_libro = document.getElementById("titulo_libro").value;
