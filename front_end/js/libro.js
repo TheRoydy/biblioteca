@@ -275,7 +275,6 @@ function validarCampos() {
 }
 
 function registrarLibro() {
-
   let formData = {
     "titulo_libro": document.getElementById("titulo_libro").value,
     "autor_libro": document.getElementById("autor_libro").value,
@@ -286,23 +285,33 @@ function registrarLibro() {
   };
 
   let camposValidos = true;
-  let camposRequeridos = [
-    "titulo_libro",
-    "autor_libro",
-    "genero_libro",
-    "codigo_ISBN",
-    "libros_disponibles",
-    "libros_ocupados",
+  let mensajeError = "";
 
-  ];
-
-  camposRequeridos.forEach(function (campo) {
-    let valorCampo = document.getElementById(campo).value.trim();
-    if (valorCampo === "") {
-      camposValidos = false;
-      return false; // Terminar la iteración si se encuentra un campo vacío
-    }
-  });
+  // Validar cada campo requerido
+  if (!validarTitulo(document.getElementById("titulo_libro"))) {
+    camposValidos = false;
+    mensajeError += "El título del libro es inválido. ";
+  }
+  if (!validarAutor(document.getElementById("autor_libro"))) {
+    camposValidos = false;
+    mensajeError += "El autor del libro es inválido. ";
+  }
+  if (!validarGenero(document.getElementById("genero_libro"))) {
+    camposValidos = false;
+    mensajeError += "El género del libro es inválido. ";
+  }
+  if (!validarIsbn(document.getElementById("codigo_ISBN"))) {
+    camposValidos = false;
+    mensajeError += "El código ISBN debe ser un número no negativo y de longitud entre 10 y 13 caracteres. ";
+  }
+  if (!validarLi_Disponibles(document.getElementById("libros_disponibles"))) {
+    camposValidos = false;
+    mensajeError += "El número de libros disponibles debe ser un número no negativo. ";
+  }
+  if (!validarLi_Ocupados(document.getElementById("libros_ocupados"))) {
+    camposValidos = false;
+    mensajeError += "El número de libros ocupados debe ser un número no negativo. ";
+  }
 
   if (camposValidos) {
     $.ajax({
@@ -326,11 +335,10 @@ function registrarLibro() {
   } else {
     Swal.fire({
       title: "¡Error!",
-      text: "Llene todos los campos correctamente",
+      text: mensajeError,
       icon: "error"
     });
   }
-
 }
 
 //validar Titulo
@@ -405,83 +413,63 @@ function validarGenero(cuadroNumero) {
 }
 
 //validar ISBN
-function validarCampos() {
-  var codigo_ISBN = document.getElementById("codigo_ISBN");
-  return validarIsbn(codigo_ISBN);
-}
 function validarIsbn(cuadroNumero) {
-  /*
-  numero documento 
-  min=5
-  max=11
-  numero entero
- 
-  si cumple, se cambia color a verde
-  si no, se cambia a rojo
-  */
   var valor = cuadroNumero.value;
   var valido = true;
-  if (valor.length < 5 || valor.length > 11) {
-    valido = false
+
+  // Verificar si es un número, si es negativo o si la longitud no es la adecuada
+  if (isNaN(valor) || valor < 0 || valor.length < 10 || valor.length > 13) {
+    valido = false;
   }
 
   if (valido) {
-    //cuadro de texto cumple
     cuadroNumero.className = "form-control is-valid";
   } else {
-    //cuadro de texto no cumple
     cuadroNumero.className = "form-control is-invalid";
   }
   return valido;
-
 }
+
+
 
 //validar Libros Disponibles
-function validarCampos() {
-  var libros_disponibles = document.getElementById("libros_disponibles");
-  return validarLi_Disponibles(libros_disponibles);
-}
 function validarLi_Disponibles(cuadroNumero) {
-
   var valor = cuadroNumero.value;
   var valido = true;
-  if (valor.length < 1 || valor.length > 20) {
-    valido = false
+
+  // Verificar si es un número y si es negativo
+  if (isNaN(valor) || valor < 0 || valor.length < 1 || valor.length > 20) {
+    valido = false;
   }
 
   if (valido) {
-    //cuadro de texto cumple
     cuadroNumero.className = "form-control is-valid";
   } else {
-    //cuadro de texto no cumple
     cuadroNumero.className = "form-control is-invalid";
   }
   return valido;
 }
+
 
 //Validad Libros Ocupados
-function validarCampos() {
-  var libros_ocupados = document.getElementById("libros_ocupados");
-  return validarLi_Ocupados(libros_ocupados);
-}
 function validarLi_Ocupados(cuadroNumero) {
-
   var valor = cuadroNumero.value;
   var valido = true;
-  if (valor.length < 1 || valor.length > 20) {
-    valido = false
+
+  // Verificar si es un número y si es negativo
+  if (isNaN(valor) || valor < 0 || valor.length < 1 || valor.length > 20) {
+    valido = false;
   }
 
   if (valido) {
-    //cuadro de texto cumple
     cuadroNumero.className = "form-control is-valid";
   } else {
-    //cuadro de texto no cumple
     cuadroNumero.className = "form-control is-invalid";
   }
   return valido;
-
 }
+
+
 
 function limpiarFormulario() {
   document.getElementById("titulo_libro").className = "form-control";
