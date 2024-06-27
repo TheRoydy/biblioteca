@@ -285,15 +285,6 @@ function registrarLibro() {
   };
 
   let camposValidos = true;
-  let camposRequeridos = [
-    "titulo_libro",
-    "autor_libro",
-    "genero_libro",
-    "codigo_ISBN",
-    "libros_disponibles",
-    "libros_ocupados",
-
-  ];
   let mensajeError = "";
 
   // Validar cada campo requerido
