@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Sena</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body onload="listarPrestamos();">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 bg-dark sidebar">
+                <div class="sidebar-heading text-light pt-3 mb-4 custom-blue">
+                    <img src="../img/libro.png" class="mr-2" style="height: 100px;">
+                    <h1 style="font-size: 35px;">Biblioteca Sena</h1>
+                </div>
+                <ul class="list-unstyled" style="margin-left: auto;">
+                    <li><a href="../view/libro.html" class="text-light"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../view/usuarios.html" class="text-light"><i class="fas fa-users"></i> Usuarios</a>
+                    </li>
+                    <li><a href="../view/prestamos.html" class="text-light"><i class="fas fa-book-reader"></i>
+                            Préstamos</a></li>
+                    <li><a href="#" class="text-light"><i class="fas fa-money-bill-wave"></i>
+                            Multas</a></li>
+                </ul>
+            </div>
+            <div class="col-md-10">
+                <h1 class="mt-3">Prestamos</h1>
+                <div class="row">
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="../view/agregar_prestamo.html"><button type="button" class="btn btn-success"
+                                style="margin-top: 10px;">Añadir un Prestamo</button></a>
+
+                    </div>
+                    <div class="col-md-8 text-right">
+                        <div class="form-inline  justify-content-end">
+                            <input type="search" class="form-control mr-2" id="inputSearch" placeholder="Buscar"
+                                style="margin-top: 10px;">
+                            <button type="button" class="btn btn-primary ml-2" onclick="listarPrestamo();"
+                                style="margin-top: 10px;">Aplicar Filtro</button>
+                        </div>
+                    </div>
+                </div>
+                <hr> <!-- Línea horizontal debajo de los botones -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Prestamo</th>
+                                    <th>Fe. Prestamo</th>
+                                    <th>Fe. Devolución</th>
+                                    <th>Usuario</th>
+                                    <th>Li. Prestado</th>
+                                    <th>Estado</th>
+                                    <th id="headerAcciones">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpoTabla">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+   <!-- Modal para editar el prestamo -->
+   <div class="modal fade" id="EditarModal" tabindex="-1" role="dialog" aria-labelledby="editarLibroLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 class="modal-title" id="editarLibroLabel">Editar Libro</h5>
+               <input id="id_libro" type="hidden">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body">
+               <form id="editarLibroForm">
+                   <div class="form-group">
+                       <label for="libroTitulo">Título</label>
+                       <input type="text" class="form-control" id="titulo_libro" placeholder="Título del libro">
+                   </div>
+                   <div class="form-group">
+                       <label for="libroAutor">Autor</label>
+                       <input type="text" class="form-control" id="autor_libro" placeholder="Autor del libro">
+                   </div>
+                   <div class="form-group">
+                       <label for="libroGenero">Género</label>
+                       <select class="form-control" id="genero_libro">
+                           <option value="aventura">Aventura</option>
+                           <option value="biografia">Biografía</option>
+                           <option value="ciencia_ficcion">Ciencia Ficción</option>
+                           <option value="crimen">Crimen</option>
+                           <option value="drama">Drama</option>
+                           <option value="ensayo">Ensayo</option>
+                           <option value="fantasia">Fantasía</option>
+                           <option value="historico">Histórico</option>
+                           <option value="humor">Humor</option>
+                           <option value="infantil">Infantil</option>
+                           <option value="juvenil">Juvenil</option>
+                           <option value="misterio">Misterio</option>
+                           <option value="novela_negra">Novela Negra</option>
+                           <option value="poesia">Poesía</option>
+                           <option value="romance">Romance</option>
+                           <option value="suspenso">Suspenso</option>
+                           <option value="terror">Terror</option>
+                           <option value="accion">Acción</option>
+                           <option value="amor">Amor</option>
+                           <option value="cuento">Cuento</option>
+                           <option value="fabula">Fábula</option>
+                           <option value="filosofico">Filosófico</option>
+                           <option value="guerra">Guerra</option>
+                           <option value="lirico">Lírico</option>
+                           <option value="musical">Musical</option>
+                           <option value="periodistico">Periodístico</option>
+                           <option value="realista">Realista</option>
+                           <option value="otro">Otro</option>
+                       </select>
+                   </div>
+                   <div class="form-group">
+                       <label for="libroISBN">ISBN</label>
+                       <input type="text" class="form-control" id="codigo_ISBN" placeholder="Código ISBN">
+                   </div>
+                   <div class="form-group">
+                       <label for="librosDisponibles">Libros Disponibles</label>
+                       <input type="number" class="form-control" id="libros_disponibles"
+                           placeholder="Cantidad de libros disponibles">
+                   </div>
+                   <div class="form-group">
+                       <label for="librosOcupados">Libros Ocupados</label>
+                       <input type="number" class="form-control" id="libros_ocupados"
+                           placeholder="Cantidad de libros ocupados">
+                   </div>
+               </form>
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-primary" onclick="actualizarLibro()">Guardar
+                   Cambios</button>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+<!--Modal para traer mas detalle del prestamo-->
+<div class="modal fade" id="ModalDetalleLibro" tabindex="-1" role="dialog" aria-labelledby="editarLibroLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarLibroLabel">Detalles del Libro</h5>
+                <input id="id_libro" type="hidden">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editarLibroForm">
+                    <div class="form-group">
+                        <label for="libroTitulo">Título</label>
+                        <input type="text" class="form-control" id="titulo_libro" placeholder="Título del libro" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="libroAutor">Autor</label>
+                        <input type="text" class="form-control" id="autor_libro" placeholder="Autor del libro" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="libroGenero">Género</label>
+                        <input type="text" class="form-control" id="genero_libro" placeholder="Género del libro" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="libroISBN">ISBN</label>
+                        <input type="text" class="form-control" id="codigo_ISBN" placeholder="Código ISBN" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="librosDisponibles">Libros Disponibles</label>
+                        <input type="number" class="form-control" id="libros_disponibles" placeholder="Cantidad de libros disponibles" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="librosOcupados">Libros Ocupados</label>
+                        <input type="number" class="form-control" id="libros_ocupados" placeholder="Cantidad de libros ocupados" readonly>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+ </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/prestamo.js"></script>
+
+</body>
+
+</html>

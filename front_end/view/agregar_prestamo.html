@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Sena</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 bg-dark sidebar">
+                <div class="sidebar-heading text-light pt-3 mb-4 custom-blue">
+                    <img src="../img/libro.png" class="mr-2" style="height: 100px;">
+                    <h1 style="font-size: 35px;">Biblioteca Sena</h1>
+                </div>
+                <ul class="list-unstyled" style="margin-left: 10px;">
+                    <li><a href="../view/libro.html" class="text-light"><i class="fas fa-book"></i> Libros</a></li>
+                    <li><a href="../view/usuarios.html" class="text-light"><i class="fas fa-users"></i> Usuarios</a>
+                    </li>
+                    <li><a href="../view/prestamos.html" class="text-light"><i class="fas fa-book-reader"></i>
+                            Préstamos</a></li>
+                    <li><a href="#" class="text-light"><i class="fas fa-money-bill-wave"></i>
+                            Multas</a></li>
+                </ul>
+            </div>
+            <div class="container">
+                <h1 style="margin-top: 100px">Añadir Prestamo</h1>
+                <h6>Todos los campos son obligatorios</h6>
+                <br>
+                <div class="row">
+                    <div class="col col-xl-6 col-12">
+                        <b><label for="fecha_prestamo">Fecha de Prestamo *</label></b>
+                        <input type="date" id="fecha_prestamo" class="form-control"
+                            onfocusout="validarFePrestamo(this);" />
+                    </div>
+
+                    <div class="col col-xl-6 col-12">
+                        <b><label for="fecha_devolucion">Fecha de Devolución *</label></b>
+                        <input type="date" id="fecha_devolucion" class="form-control"
+                            onfocusout="validarFeDevolucion(this);" />
+                    </div>
+
+                    <div class="col col-xl-6 col-12">
+                        <b><label for="usuarioSelect">Usuario *</label></b>
+                        <select class="form-control" id="usuario_prestamo" required>
+                        </select>
+                    </div>
+
+                    <div class="col col-xl-6 col-12">
+                        <b><label for="libroSelect">Libro *</label></b>
+                        <select class="form-control" id="libro_prestamo" required>
+                        </select>
+                    </div>
+                    <div class="col col-xl-6 col-12">
+                        <b><label for="Estado">Estado *</label></b>
+                        <select class="form-control" id="estado_prestamo" required>
+                            <option selected disabled>Seleccione el tipo de prestamo:</option>
+                            <option value="prestamo">Prestado</option>
+                            <option value="entregado">Entregado</option>
+                            <option value="cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-success" onclick="registrarPrestamo();">
+                    Agregar Prestamo
+                </button>
+                <button class="btn btn-primary" onclick="limpiarFormulario();">
+                    Limpiar Formulario
+                </button>
+                <a href="../view/prestamos.html"><button class="btn btn-danger">Cerrar</button></a>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../js/prestamo.js"></script>
+</body>
+
+</html>

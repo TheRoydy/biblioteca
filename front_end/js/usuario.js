@@ -249,7 +249,11 @@ function registrarUsuario() {
         "correo_usuario",
         "tipo_usuario",
 
+
     ];
+    if (!validarCorreo(correo_usuario)) {
+        camposValidos = false;
+    }
 
     camposRequeridos.forEach(function (campo) {
         let valorCampo = document.getElementById(campo).value.trim();
@@ -277,16 +281,16 @@ function registrarUsuario() {
                 Swal.fire("Error", "Error al guardar, " + error.responseText, "error");
             },
         });
-
     } else {
+        // Mostrar mensaje genérico si otros campos no están llenos correctamente
         Swal.fire({
             title: "¡Error!",
             text: "Llene todos los campos correctamente",
             icon: "error"
         });
     }
-
 }
+
 
 //validar Titulo
 function validarCampos() {
@@ -311,7 +315,7 @@ function validarNombre(cuadroNumero) {
     return valido;
 }
 
-//Validar Autor
+//Validar direccion
 function validarCampos() {
     var direccion_usuario = document.getElementById("direccion_usuario");
     return validarDireccion(direccion_usuario);
@@ -335,28 +339,24 @@ function validarDireccion(cuadroNumero) {
 
 }
 
-//Validar Genero
+//Validar Correo
 function validarCampos() {
     var correo_usuario = document.getElementById("correo_usuario");
     return validarCorreo(correo_usuario);
 }
 function validarCorreo(cuadroNumero) {
-
     var valor = cuadroNumero.value;
-    var valido = true;
-    if (valor.length < 1 || valor.length > 20) {
-        valido = false
-    }
+    var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var valido = regex.test(valor);
 
     if (valido) {
-        //cuadro de texto cumple
         cuadroNumero.className = "form-control is-valid";
     } else {
-        //cuadro de texto no cumple
         cuadroNumero.className = "form-control is-invalid";
     }
     return valido;
 }
+
 
 //validar Libros Disponibles
 function validarCampos() {
