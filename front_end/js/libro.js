@@ -1,22 +1,102 @@
 var url = "http://localhost:8080/api/v1/libro/";
 
 
-/*document.getElementById("titulo_libro").addEventListener("keypress", soloLetras);
+document.getElementById("titulo_libro").addEventListener("keypress",tituloLibro);
+document.getElementById("autor_libro").addEventListener("keypress",soloLetras);
+document.getElementById("genero_libro").addEventListener("keypress",soloLetras);
+document.getElementById("codigo_ISBN").addEventListener("keypress",soloNumeros);
+document.getElementById("libros_disponibles").addEventListener("keypress",soloNumeros);
+document.getElementById("libros_ocupados").addEventListener("keypress",soloNumeros);
 
-//Este campo solo permite letras
-const letras_y_caracteresPermitidos = [] 
+
+function soloLetras(event){
+  console.log("Llave presionada: "+event.key);
+  console.log("Código tecla: "+event.keyCode);
+  
+  const letrasPermitidas=[
+    //letras en minúsculas
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","x","y","w","o","z","ñ","Ñ",
+    //LETRAS EN MAYÚSCULAS
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ",
+    //letras con tildes, mayusculas y minusculas
+    "á",  "é",  "í",  "ó",  "ú",  "Á",  "É",  "Í",  "Ó",  "Ú"
+
+  ];
+  const numeroPermitidos=[
+    '1', '2', '3','4','5','6','7','8','9','0'
+  ];
+  const caracteresPermitidos=[
+    '@','_','-','.'
+  ];
 
 
-function soloLetras(event) {
-  console.log("Llave presionada. " + event.key);
-  console.log("Codigo tecla: "+event.keyCode);
-  //se debe ajustar para aceptar mayusculas, minusculas, espacios, ñ
-  if (!(letras_y_caracteresPermitidos.includes(event.key))){
+  if (!(letrasPermitidas.includes(event.key))){
     event.preventDefault();
     return;
   }
 
-}*/
+
+}
+
+//función para que el titulo del libro permita solamente numeros y letras
+function tituloLibro(event){
+  console.log("Llave presionada: "+event.key);
+  console.log("Código tecla: "+event.keyCode);
+  
+  const letrasPermitidas=[
+    //letras en minúsculas
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","x","y","w","o","z","ñ","Ñ",
+    //LETRAS EN MAYÚSCULAS
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ",
+    //letras con tildes, mayusculas y minusculas
+    "á",  "é",  "í",  "ó",  "ú",  "Á",  "É",  "Í",  "Ó",  "Ú"
+
+  ];
+  const numeroPermitidos=[
+    '1', '2', '3','4','5','6','7','8','9','0'
+  ];
+  const caracteresPermitidos=[
+    '@','_','-','.'
+  ];
+
+
+  if (
+    !(letrasPermitidas.includes(event.key)) &&
+    !(numeroPermitidos.includes(event.key))
+  ){
+    event.preventDefault();
+    return;
+  }
+
+
+}
+
+function soloNumeros(event){
+  console.log("Llave presionada: "+event.key);
+  console.log("Código tecla: "+event.keyCode);
+  
+  const letrasPermitidas=[
+    //letras en minúsculas
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","x","y","w","o","z","ñ","Ñ",
+    //LETRAS EN MAYÚSCULAS
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ",
+    //letras con tildes, mayusculas y minusculas
+    "á",  "é",  "í",  "ó",  "ú",  "Á",  "É",  "Í",  "Ó",  "Ú"
+
+  ];
+  const numeroPermitidos=[
+    '1', '2', '3','4','5','6','7','8','9','0'
+  ];
+  const caracteresPermitidos=[
+    '@','_','-','.'
+  ];
+
+
+  if (!(numeroPermitidos.includes(event.key))){
+    event.preventDefault();
+    return;
+  }
+}
 
 function listarLibros() {
   //METODO PARA LISTAR LOS CLIENTES

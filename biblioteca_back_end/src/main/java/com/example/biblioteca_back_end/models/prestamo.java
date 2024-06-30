@@ -1,6 +1,5 @@
 package com.example.biblioteca_back_end.models;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -108,7 +107,4 @@ public class prestamo {
     public boolean contieneCamposVacios(){
         return false;
     }
-
-    
-    
 }

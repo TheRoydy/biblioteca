@@ -2,8 +2,8 @@ var url = "http://localhost:8080/api/v1/prestamo/";
 var urlUsuario = "http://localhost:8080/api/v1/usuario/";
 var urlLibro = "http://localhost:8080/api/v1/libro/";
 
-
-function listaPrestamos() {
+// Función para listar los préstamos realizados
+function listarPrestamos() {
     $(document).ready(function () {
         $.ajax({
             url: url,
@@ -18,57 +18,37 @@ function listaPrestamos() {
                 result.forEach(function (prestamo) {
                     var fila = document.createElement("tr");
 
-                    // Agregar cada celda de la fila con los datos del préstamo
-                    var idPrestamo = document.createElement("td");
-                    idPrestamo.textContent = prestamo.id_prestamo;
-                    fila.appendChild(idPrestamo);
+                    var id_prestamo = document.createElement("td");
+                    id_prestamo.textContent = prestamo.id_prestamo;
+                    fila.appendChild(id_prestamo);
 
-                    var libro = document.createElement("td");
-                    libro.textContent = prestamo.libro.titulo;
-                    fila.appendChild(libro);
+                    var fecha_prestamo = document.createElement("td");
+                    fecha_prestamo.textContent = prestamo.fecha_prestamo;
+                    fila.appendChild(fecha_prestamo);
+
+                    var fecha_devolucion = document.createElement("td");
+                    fecha_devolucion.textContent = prestamo.fecha_devolucion;
+                    fila.appendChild(fecha_devolucion);
 
                     var usuario = document.createElement("td");
-                    usuario.textContent = prestamo.usuario.nombre;
+                    usuario.textContent = prestamo.usuario.nombre_usuario;
                     fila.appendChild(usuario);
 
-                    var fechaInicio = document.createElement("td");
-                    fechaInicio.textContent = prestamo.fecha_ingreso;
-                    fila.appendChild(fechaInicio);
+                    var libro = document.createElement("td");
+                    libro.textContent = prestamo.libro.titulo_libro;
+                    fila.appendChild(libro);
 
-                    var fechaMaxima = document.createElement("td");
-                    fechaMaxima.textContent = prestamo.fecha_maxima;
-                    fila.appendChild(fechaMaxima);
-
-                    var estado = document.createElement("td");
-                    estado.textContent = prestamo.estado; // Agregar el estado del préstamo
-                    fila.appendChild(estado);
+                    var estado_prestamo = document.createElement("td");
+                    estado_prestamo.textContent = prestamo.estado_prestamo;
+                    fila.appendChild(estado_prestamo);
 
                     var acciones = document.createElement("td");
-                    acciones.innerHTML = '<button class="btn btn-primary btn-sm" onclick="editarPrestamo(\'' + prestamo.id_prestamo + '\')">Editar</button> <button class="btn btn-danger btn-sm" onclick="eliminarPrestamo(\'' + prestamo.id_prestamo + '\')">Eliminar</button>';
+                    acciones.innerHTML = `
+                        <button class="btn btn-warning btn-sm" onclick="editarPrestamo('${prestamo.id_prestamo}')">Editar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarPrestamo('${prestamo.id_prestamo}')">Eliminar</button>
+                    `;
                     fila.appendChild(acciones);
 
-
-                    var botonEliminar = document.createElement("button");
-                    botonEliminar.innerText = "Eliminar";
-                    botonEliminar.className = "btn btn-danger eliminar";
-                    botonEliminar.onclick = function () {
-                        Swal.fire({
-                            title: '¿Estás seguro?',
-                            text: "¡No podrás revertir esto!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Sí, eliminarlo'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                eliminarLibro(prestamo.id_prestamo);
-                            }
-                        });
-                    };
-
-
-                    // Agregar la fila a la tabla
                     cuerpoTabla.appendChild(fila);
                 });
             },
@@ -79,96 +59,93 @@ function listaPrestamos() {
     });
 }
 
-
-
-
-
-// Función para cargar la lista de usuarios
-// Función para cargar la lista de usuarios
 // Función para cargar la lista de usuarios
 function cargarListaUsuarios() {
-    var usuario = document.getElementById("usuario");
+    var usuarioSelect = document.getElementById("usuario_prestamo");
 
-    if (usuario) {
-        // Limpiar las opciones actuales
-        usuario.innerHTML = "";
+    if (usuarioSelect) {
+        usuarioSelect.innerHTML = "";
 
         $.ajax({
             url: urlUsuario,
             type: "GET",
             success: function (result) {
-                for (var i = 0; i < result.length; i++) {
+                result.forEach(function (usuario) {
                     var option = document.createElement("option");
-                    option.value = result[i].id_usuario;
-                    option.text = result[i].nombre + " - " + result[i].correo_electronico;
-                    usuario.appendChild(option);
-                }
+                    option.value = usuario.id_usuario;
+                    option.text = `${usuario.nombre_usuario} - ${usuario.correo_usuario}`;
+                    usuarioSelect.appendChild(option);
+                });
             },
             error: function (error) {
                 console.error("Error al obtener la lista de Usuarios: " + error);
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo cargar la lista de usuarios.",
+                    icon: "error"
+                });
             }
         });
     } else {
-        console.error("Elemento con ID 'usuario' no encontrado.");
+        console.error("Elemento con ID 'usuario_prestamo' no encontrado.");
     }
 }
 
+
+
 // Función para cargar la lista de libros
 function cargarListaLibros() {
-    var libro = document.getElementById("libro");
+    var libroSelect = document.getElementById("libro_prestamo");
 
-    if (libro) {
-        // Limpiar las opciones actuales
-        libro.innerHTML = "";
+    if (libroSelect) {
+        libroSelect.innerHTML = "";
 
         $.ajax({
             url: urlLibro,
             type: "GET",
             success: function (result) {
-                for (var i = 0; i < result.length; i++) {
+                result.forEach(function (libro) {
                     var option = document.createElement("option");
-                    option.value = result[i].id_libro;
-                    option.text = result[i].titulo;
-                    libro.appendChild(option);
-                }
+                    option.value = libro.id_libro;
+                    option.text = libro.titulo_libro;
+                    libroSelect.appendChild(option);
+                });
             },
             error: function (error) {
                 console.error("Error al obtener la lista de Libros: " + error);
             }
         });
     } else {
-        console.error("Elemento con ID 'libro' no encontrado.");
+        console.error("Elemento con ID 'libro_prestamo' no encontrado.");
     }
 }
 
+// Función para registrar un préstamo
 function registrarPrestamo() {
-    let usuarioId = document.getElementById("usuario").value;
-    let libroId = document.getElementById("libro").value;
-    let fecha_ingreso = document.getElementById("fecha_ingreso").value;
-    let fecha_maxima = document.getElementById("fecha_maxima").value;
-    let estado = document.getElementById("estado").value;
+    let fechaPrestamo = document.getElementById("fecha_prestamo").value;
+    let fechaDevolucion = document.getElementById("fecha_devolucion").value;
+    let idUsuario = document.getElementById("usuario_prestamo").value;
+    let idLibro = document.getElementById("libro_prestamo").value;
+    let estadoPrestamo = document.getElementById("estado_prestamo").value;
 
-    // Agregar console.log para verificar los valores
-    console.log("Usuario ID:", usuarioId);
-    console.log("Libro ID:", libroId);
-    console.log("Fecha Ingreso:", fecha_ingreso);
-    console.log("Fecha Maxima:", fecha_maxima);
-    console.log("Estado:", estado);
+    // Formatear las fechas en el formato esperado (yyyy-MM-dd)
+    fechaPrestamo = formatDate(fechaPrestamo);
+    fechaDevolucion = formatDate(fechaDevolucion);
 
     let prestamoData = {
         "usuario": {
-            "id_usuario": usuarioId
+            "id_usuario": idUsuario
         },
         "libro": {
-            "id_libro": libroId
+            "id_libro": idLibro
         },
-        "fecha_ingreso": fecha_ingreso,
-        "fecha_maxima": fecha_maxima,
-        "estado": estado
+        "fecha_prestamo": fechaPrestamo,
+        "fecha_devolucion": fechaDevolucion,
+        "estado_prestamo": estadoPrestamo
     };
 
     $.ajax({
-        url: "http://localhost:8080/api/v1/prestamo/",
+        url: url,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(prestamoData),
@@ -182,7 +159,6 @@ function registrarPrestamo() {
         },
         error: function (error) {
             console.error("Error al registrar el préstamo:", error);
-            // Mostrar mensaje de error detallado
             Swal.fire({
                 title: "Error",
                 text: "Error al registrar el préstamo: " + error.responseText,
@@ -192,16 +168,12 @@ function registrarPrestamo() {
     });
 }
 
-function limpiarFormulario() {
-    document.getElementById("usuario").value = "";
-    document.getElementById("libro").value = "";
-    document.getElementById("fecha_ingreso").value = "";
-    document.getElementById("fecha_maxima").value = "";
-    document.getElementById("estado").value = "";
+function formatDate(dateString) {
+    let [year, month, day] = dateString.split("-");
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 }
 
-
-
+// Función para eliminar un préstamo
 function eliminarPrestamo(idPrestamo) {
     Swal.fire({
         title: '¿Estás seguro?',
@@ -218,7 +190,7 @@ function eliminarPrestamo(idPrestamo) {
                 url: url + idPrestamo,
                 type: "DELETE",
                 success: function (result) {
-                    listaPrestamo(); // Refresh the loan list after deletion
+                    listarPrestamos();
                     Swal.fire({
                         title: "¡Eliminado!",
                         text: "El préstamo ha sido eliminado correctamente.",
@@ -237,3 +209,24 @@ function eliminarPrestamo(idPrestamo) {
         }
     });
 }
+
+// Función para limpiar el formulario
+function limpiarFormulario() {
+    document.getElementById("fecha_prestamo").className = "form-control";
+    document.getElementById("fecha_devolucion").className = "form-control";
+    document.getElementById("usuario_prestamo").className = "form-control";
+    document.getElementById("libro_prestamo").className = "form-control";
+    document.getElementById("estado_prestamo").className = "form-control";
+
+    document.getElementById("fecha_prestamo").value = "";
+    document.getElementById("fecha_devolucion").value = "";
+    document.getElementById("usuario_prestamo").value = "";
+    document.getElementById("libro_prestamo").value = "";
+    document.getElementById("estado_prestamo").value = "";
+}
+
+// Cargar las listas de usuarios y libros al cargar la página
+$(document).ready(function () {
+    cargarListaUsuarios();
+    cargarListaLibros();
+});

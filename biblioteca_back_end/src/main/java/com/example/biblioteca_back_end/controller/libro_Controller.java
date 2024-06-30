@@ -63,6 +63,10 @@ public class libro_Controller {
             return new ResponseEntity<>("El numero de libros ocupados es obligatorio", HttpStatus.BAD_REQUEST);
         }
 
+		if(libro.getCodigo_ISBN().length()!=13) {
+        	return new ResponseEntity<>("Error, son solamente 13 numeros",HttpStatus.BAD_REQUEST);
+        }
+
 		libro_Service.save(libro);
 		return new ResponseEntity<>(libro,HttpStatus.OK);
 	}
