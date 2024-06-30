@@ -59,7 +59,7 @@ function listarPrestamos() {
     });
 }
 
-// Función para cargar la lista de usuarios
+// Función para cargar la lista de usuarios en el registro
 function cargarListaUsuarios() {
     var usuarioSelect = document.getElementById("usuario_prestamo");
 
@@ -93,7 +93,7 @@ function cargarListaUsuarios() {
 
 
 
-// Función para cargar la lista de libros
+// Función para cargar la lista de libros en el registro
 function cargarListaLibros() {
     var libroSelect = document.getElementById("libro_prestamo");
 
@@ -168,6 +168,11 @@ function registrarPrestamo() {
     });
 }
 
+/*
+La función formatDate tiene como objetivo formatear una fecha dada en formato de cadena (dateString) 
+para asegurarse de que los componentes de mes y día estén en un formato de dos dígitos, 
+añadiendo ceros a la izquierda si es necesario. El formato de salida de la fecha es YYYY-MM-DD.
+ */
 function formatDate(dateString) {
     let [year, month, day] = dateString.split("-");
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;

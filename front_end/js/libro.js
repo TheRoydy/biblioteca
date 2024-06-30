@@ -1,6 +1,6 @@
 var url = "http://localhost:8080/api/v1/libro/";
 
-
+//Designamos a que campo queremos que vayan los ciertos caracteres
 document.getElementById("titulo_libro").addEventListener("keypress",tituloLibro);
 document.getElementById("autor_libro").addEventListener("keypress",soloLetras);
 document.getElementById("genero_libro").addEventListener("keypress",soloLetras);
@@ -96,6 +96,7 @@ function soloNumeros(event){
   }
 }
 
+//funcion para listar los libros registrados
 function listarLibros() {
   //METODO PARA LISTAR LOS CLIENTES
   //SE CREA LA PETICION AJAX
@@ -133,7 +134,7 @@ function listarLibros() {
         var headerAcciones = document.getElementById("headerAcciones");
         headerAcciones.style.textAlign = "center";
 
-        //Para traer el modal
+        //Para traer el modal para editar el libro
         let botonEditarLibro = document.createElement("button");
         botonEditarLibro.value = result[i]["id_libro"];
         botonEditarLibro.innerHTML = "Editar";
@@ -273,17 +274,14 @@ function actualizarLibro() {
 
 
       success: function (result) {
-
-        // Manejar la respuesta exitosa según necesites
         Swal.fire({
           title: "¡Excelente!",
           text: "Se guardó correctamente",
           icon: "success"
         });
-        listarLibros(); // Recargar la lista después de eliminar
+        listarLibros(); // Recargar la lista después de eliminar un libro, asi se hace automaticamente
       },
       error: function (error) {
-        // Manejar el error de la petición
         Swal.fire({
           title: "¡Error!",
           text: "No se guardó",
@@ -320,6 +318,7 @@ function actualizarLibro() {
 
 }
 
+//funcion para la validacion de los campos de libro
 function validarCampos() {
   var titulo_libro = document.getElementById("titulo_libro").value;
   var autor_libro = document.getElementById("autor_libro").value;
@@ -352,6 +351,7 @@ function validarCampos() {
   }
 }
 
+//funcion para registrar libros
 function registrarLibro() {
   let formData = {
     "titulo_libro": document.getElementById("titulo_libro").value,
@@ -536,8 +536,7 @@ function validarLi_Ocupados(cuadroNumero) {
   return valido;
 }
 
-
-
+//funcion para limpiar el formulario de registro 
 function limpiarFormulario() {
   document.getElementById("titulo_libro").className = "form-control";
   document.getElementById("autor_libro").className = "form-control";

@@ -1,5 +1,6 @@
 var url = "http://localhost:8080/api/v1/usuario/";
 
+//Designamos a que campo queremos que vayan los ciertos caracteres
 document.getElementById("nombre_usuario").addEventListener("keypress",soloLetras);
 document.getElementById("direccion_usuario").addEventListener("keypress",soloLetras);
 document.getElementById("correo_usuario").addEventListener("keypress",soloLetrasCorreo);
@@ -54,7 +55,7 @@ function soloLetrasCorreo(event){
     }
   }
 
-
+//funcion para listar ls usuarios
 function listarUsuarios() {
     //METODO PARA LISTAR LOS CLIENTES
     //SE CREA LA PETICION AJAX
@@ -90,7 +91,7 @@ function listarUsuarios() {
                 var headerAcciones = document.getElementById("headerAcciones");
                 headerAcciones.style.textAlign = "center";
 
-                //Para traer el modal
+                //Para traer el modal para editar la info del usuario
                 let botonEditarUsuario = document.createElement("button");
                 botonEditarUsuario.value = result[i]["id_usuario"];
                 botonEditarUsuario.innerHTML = "Editar";
@@ -201,17 +202,14 @@ function actualizarUsuario() {
 
 
             success: function (result) {
-
-                // Manejar la respuesta exitosa según necesites
                 Swal.fire({
                     title: "¡Excelente!",
                     text: "Se guardó correctamente",
                     icon: "success"
                 });
-                listarUsuarios(); // Recargar la lista después de eliminar
+                listarUsuarios(); // Recargar la lista automaticamente despues de eliminar un usuario
             },
             error: function (error) {
-                // Manejar el error de la petición
                 Swal.fire({
                     title: "¡Error!",
                     text: "No se guardó",
@@ -246,6 +244,7 @@ function actualizarUsuario() {
 
 }
 
+//Funcion para validar los campos
 function validarCampos() {
     var nombre_usuario = document.getElementById("nombre_usuario").value;
     var direccion_usuario = document.getElementById("direccion_usuario").value;
@@ -270,6 +269,7 @@ function validarCampos() {
     }
 }
 
+//funcion para registrar a los usuarios
 function registrarUsuario() {
 
     let formData = {
@@ -329,7 +329,7 @@ function registrarUsuario() {
 }
 
 
-//validar Titulo
+//validar nombre
 function validarCampos() {
     var nombre_usuario = document.getElementById("nombre_usuario");
     return validarNombre(nombre_usuario);
@@ -395,7 +395,7 @@ function validarCorreo(cuadroNumero) {
 }
 
 
-//validar Libros Disponibles
+//validar el tipo de usuario
 function validarCampos() {
     var tipo_usuario = document.getElementById("tipo_usuario");
     return validarTipo_Usuario(tipo_usuario);
@@ -418,6 +418,7 @@ function validarTipo_Usuario(cuadroNumero) {
     return valido;
 }
 
+//funcion para limpiar el formulario de registro
 function limpiarFormulario() {
     document.getElementById("nombre_usuario").className = "form-control";
     document.getElementById("direccion_usuario").className = "form-control";
