@@ -34,8 +34,6 @@ function soloLetras(event){
     event.preventDefault();
     return;
   }
-
-
 }
 
 //función para que el titulo del libro permita solamente numeros y letras

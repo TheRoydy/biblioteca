@@ -74,128 +74,60 @@
     </div>
 
 
-   <!-- Modal para editar el prestamo -->
-   <div class="modal fade" id="EditarModal" tabindex="-1" role="dialog" aria-labelledby="editarLibroLabel"
-   aria-hidden="true">
-   <div class="modal-dialog" role="document">
-       <div class="modal-content">
-           <div class="modal-header">
-               <h5 class="modal-title" id="editarLibroLabel">Editar Libro</h5>
-               <input id="id_libro" type="hidden">
-               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                   <span aria-hidden="true">&times;</span>
-               </button>
-           </div>
-           <div class="modal-body">
-               <form id="editarLibroForm">
-                   <div class="form-group">
-                       <label for="libroTitulo">Título</label>
-                       <input type="text" class="form-control" id="titulo_libro" placeholder="Título del libro">
-                   </div>
-                   <div class="form-group">
-                       <label for="libroAutor">Autor</label>
-                       <input type="text" class="form-control" id="autor_libro" placeholder="Autor del libro">
-                   </div>
-                   <div class="form-group">
-                       <label for="libroGenero">Género</label>
-                       <select class="form-control" id="genero_libro">
-                           <option value="aventura">Aventura</option>
-                           <option value="biografia">Biografía</option>
-                           <option value="ciencia_ficcion">Ciencia Ficción</option>
-                           <option value="crimen">Crimen</option>
-                           <option value="drama">Drama</option>
-                           <option value="ensayo">Ensayo</option>
-                           <option value="fantasia">Fantasía</option>
-                           <option value="historico">Histórico</option>
-                           <option value="humor">Humor</option>
-                           <option value="infantil">Infantil</option>
-                           <option value="juvenil">Juvenil</option>
-                           <option value="misterio">Misterio</option>
-                           <option value="novela_negra">Novela Negra</option>
-                           <option value="poesia">Poesía</option>
-                           <option value="romance">Romance</option>
-                           <option value="suspenso">Suspenso</option>
-                           <option value="terror">Terror</option>
-                           <option value="accion">Acción</option>
-                           <option value="amor">Amor</option>
-                           <option value="cuento">Cuento</option>
-                           <option value="fabula">Fábula</option>
-                           <option value="filosofico">Filosófico</option>
-                           <option value="guerra">Guerra</option>
-                           <option value="lirico">Lírico</option>
-                           <option value="musical">Musical</option>
-                           <option value="periodistico">Periodístico</option>
-                           <option value="realista">Realista</option>
-                           <option value="otro">Otro</option>
-                       </select>
-                   </div>
-                   <div class="form-group">
-                       <label for="libroISBN">ISBN</label>
-                       <input type="text" class="form-control" id="codigo_ISBN" placeholder="Código ISBN">
-                   </div>
-                   <div class="form-group">
-                       <label for="librosDisponibles">Libros Disponibles</label>
-                       <input type="number" class="form-control" id="libros_disponibles"
-                           placeholder="Cantidad de libros disponibles">
-                   </div>
-                   <div class="form-group">
-                       <label for="librosOcupados">Libros Ocupados</label>
-                       <input type="number" class="form-control" id="libros_ocupados"
-                           placeholder="Cantidad de libros ocupados">
-                   </div>
-               </form>
-           </div>
-           <div class="modal-footer">
-               <button type="button" class="btn btn-primary" onclick="actualizarLibro()">Guardar
-                   Cambios</button>
-           </div>
-       </div>
-   </div>
-</div>
+    <!-- Modal para editar el prestamo -->
+    <div class="modal fade" id="EditarModal" tabindex="-1" role="dialog" aria-labelledby="editarPrestamoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editarPrestamoLabel">Editar Prestamo</h5>
+                    <input id="id_prestamo" type="hidden">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editarLibroForm">
+                        <div class="form-group">
+                            <label for="Fecha_Prestamo">Fecha Prestamo</label>
+                            <input type="date" class="form-control" id="fecha_prestamo"
+                                placeholder="Fecha del Prestamo">
+                        </div>
+                        <div class="form-group">
+                            <label for="Fecha_Devoluvion">Fecha Devolución</label>
+                            <input type="date" class="form-control" id="fecha_devolucion"
+                                placeholder="Fecha del Prestamo">
+                        </div>
+                        <div class="form-group">
+                            <b><label for="usuarioSelect">Usuario *</label></b>
+                            <select class="form-control" id="usuario_prestamo" required>
+                            </select>
+                        </div>
 
+                        <div class="form-group">
+                            <b><label for="libroSelect">Libro *</label></b>
+                            <select class="form-control" id="libro_prestamo" required>
+                            </select>
+                        </div>
 
-<!--Modal para traer mas detalle del prestamo-->
-<div class="modal fade" id="ModalDetalleLibro" tabindex="-1" role="dialog" aria-labelledby="editarLibroLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarLibroLabel">Detalles del Libro</h5>
-                <input id="id_libro" type="hidden">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editarLibroForm">
-                    <div class="form-group">
-                        <label for="libroTitulo">Título</label>
-                        <input type="text" class="form-control" id="titulo_libro" placeholder="Título del libro" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="libroAutor">Autor</label>
-                        <input type="text" class="form-control" id="autor_libro" placeholder="Autor del libro" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="libroGenero">Género</label>
-                        <input type="text" class="form-control" id="genero_libro" placeholder="Género del libro" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="libroISBN">ISBN</label>
-                        <input type="text" class="form-control" id="codigo_ISBN" placeholder="Código ISBN" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="librosDisponibles">Libros Disponibles</label>
-                        <input type="number" class="form-control" id="libros_disponibles" placeholder="Cantidad de libros disponibles" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="librosOcupados">Libros Ocupados</label>
-                        <input type="number" class="form-control" id="libros_ocupados" placeholder="Cantidad de libros ocupados" readonly>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <b><label for="Estado">Estado *</label></b>
+                            <select class="form-control" id="estado_prestamo" required>
+                                <option selected disabled>Seleccione el tipo de prestamo:</option>
+                                <option value="prestamo">Prestado</option>
+                                <option value="entregado">Entregado</option>
+                                <option value="cancelado">Cancelado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="actualizarPrestamo()">Guardar
+                        Cambios</button>
+                </div>
             </div>
         </div>
     </div>
- </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

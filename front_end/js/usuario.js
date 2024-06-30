@@ -1,22 +1,59 @@
 var url = "http://localhost:8080/api/v1/usuario/";
 
+document.getElementById("nombre_usuario").addEventListener("keypress",soloLetras);
+document.getElementById("direccion_usuario").addEventListener("keypress",soloLetras);
+document.getElementById("correo_usuario").addEventListener("keypress",soloLetrasCorreo);
 
-/*document.getElementById("titulo_libro").addEventListener("keypress", soloLetras);
+function soloLetras(event){
+  console.log("Llave presionada: "+event.key);
+  console.log("Código tecla: "+event.keyCode);
+  
+  const letrasPermitidas=[
+    //letras en minúsculas
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","x","y","w","o","z","ñ","Ñ",
+    //LETRAS EN MAYÚSCULAS
+    "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ",
+    //letras con tildes, mayusculas y minusculas
+    "á",  "é",  "í",  "ó",  "ú",  "Á",  "É",  "Í",  "Ó",  "Ú"
 
-//Este campo solo permite letras
-const letras_y_caracteresPermitidos = [] 
+  ];
+  const numeroPermitidos=[
+    '1', '2', '3','4','5','6','7','8','9','0'
+  ];
+  const caracteresPermitidos=[
+    '@','_','-','.'
+  ];
 
 
-function soloLetras(event) {
-console.log("Llave presionada. " + event.key);
-console.log("Codigo tecla: "+event.keyCode);
-//se debe ajustar para aceptar mayusculas, minusculas, espacios, ñ
-if (!(letras_y_caracteresPermitidos.includes(event.key))){
+  if (!(letrasPermitidas.includes(event.key))){
     event.preventDefault();
     return;
+  }
 }
 
-}*/
+function soloLetrasCorreo(event){
+    console.log("Llave presionada: "+event.key);
+    console.log("Código tecla: "+event.keyCode);
+    
+    const letrasPermitidas=[
+      //letras en minúsculas
+      "a","b","c","d","e","f","g","h","i","j","k","l","m","n","p","q","r","s","t","u","v","x","y","w","o","z","ñ","Ñ",
+      //LETRAS EN MAYÚSCULAS
+      "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", " ",
+      //letras con tildes, mayusculas y minusculas
+      "á",  "é",  "í",  "ó",  "ú",  "Á",  "É",  "Í",  "Ó",  "Ú",
+      //numeros permitidos para el correo
+      '1', '2', '3','4','5','6','7','8','9','0',
+      //caracteres permitidos para el correo
+      '@','_','-','.'
+        
+    ];
+    if (!(letrasPermitidas.includes(event.key))){
+      event.preventDefault();
+      return;
+    }
+  }
+
 
 function listarUsuarios() {
     //METODO PARA LISTAR LOS CLIENTES

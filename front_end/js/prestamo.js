@@ -41,11 +41,11 @@ function listarPrestamos() {
                     var estado_prestamo = document.createElement("td");
                     estado_prestamo.textContent = prestamo.estado_prestamo;
                     fila.appendChild(estado_prestamo);
-
+                    
                     var acciones = document.createElement("td");
                     acciones.innerHTML = `
-                        <button class="btn btn-warning btn-sm" onclick="editarPrestamo('${prestamo.id_prestamo}')">Editar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarPrestamo('${prestamo.id_prestamo}')">Eliminar</button>
+                        <button class="btn btn-warning" onclick="editarPrestamo('${prestamo.id_prestamo}')">Editar</button>
+                        <button class="btn btn-danger" onclick="eliminarPrestamo('${prestamo.id_prestamo}')">Eliminar</button>
                     `;
                     fila.appendChild(acciones);
 
@@ -118,7 +118,7 @@ function cargarListaLibros() {
     } else {
         console.error("Elemento con ID 'libro_prestamo' no encontrado.");
     }
-}
+}   
 
 // Función para registrar un préstamo
 function registrarPrestamo() {
